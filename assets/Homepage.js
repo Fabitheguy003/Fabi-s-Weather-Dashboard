@@ -9,7 +9,6 @@ function initPage() {
 
     var currentweatherEl = document.getElementById("current-weather");
     
-
     // Assigning my unique API to a variable
     const APIKey = "0a3c26eaf62894d1950d131ab8076dda";
 
