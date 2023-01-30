@@ -7,7 +7,7 @@ function initPage() {
     const HumidityEl = document.getElementById("humidity");
     const WindEl = document.getElementById("wind-speed");
 
-    var currentweatherEl = document.getElementById("current-weather");
+    var nowweatherEl = document.getElementById("now-weather");
     
     // Assigning my unique API to a variable
     const APIKey = "0a3c26eaf62894d1950d131ab8076dda";
@@ -18,7 +18,7 @@ function initPage() {
         axios.get(queryURL)
             .then(function (response) {
 
-                currentweatherEl.classList.remove("d-none");
+                nowweatherEl.classList.remove("d-none");
 
                 // display current weather
                 const currentDate = new Date(response.data.dt * 1000);
@@ -33,7 +33,7 @@ function initPage() {
                 HumidityEl.innerHTML = "Humidity: " + response.data.main.humidity + "%";
                 WindEl.innerHTML = "Wind: " + response.data.wind.speed + " MPH";
 
-                // Get 5 day forecast for this city
+                // Get 5 day forecast 
                 let cityID = response.data.id;
                 let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
                 axios.get(forecastQueryURL)
@@ -65,12 +65,13 @@ function initPage() {
                              const forecastHumidityEl = document.createElement("p");
                              forecastHumidityEl.innerHTML = "Humidity: " + response.data.list[forecastIndex].main.humidity + "%";
                              forecastEls[i].append(forecastHumidityEl);
+                            
                          }
                      })
              });
      }
 
-     // Get history from local storage if any
+     // Get history from local storage
     searchEl.addEventListener("click", function () {
         const searchTerm = cityEl.value;
         getWeather(searchTerm);
